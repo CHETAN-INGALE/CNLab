@@ -1,0 +1,82 @@
+Wireshark is a network protocol analyzer that captures and visualizes the data traffic traveling through a network. It allows you to observe how different layers of the **TCP/IP model** (Ethernet, Data Link, Network, Transport, etc.) function in real-time by inspecting captured packets. Here's an explanation of each layer's operation within **Wireshark**, along with specific details about the TCP/IP stack.
+
+### 1. **Ethernet Layer (Layer 2 - Link Layer)**
+
+   - **Frame Header**:
+     The Ethernet frame consists of the following key parts:
+     - **Destination MAC Address**: The MAC address of the target device.
+     - **Source MAC Address**: The MAC address of the sender.
+     - **EtherType**: A field identifying the protocol encapsulated in the payload (e.g., IPv4, ARP, etc.).
+
+     In Wireshark, you can see the **Ethernet II** section for every captured packet, which shows the **source MAC**, **destination MAC**, and the **protocol** type (e.g., IPv4 or ARP).
+
+   - **Frame Size**:
+     Ethernet frames have a minimum size of **64 bytes** and a maximum size of **1518 bytes** (including the headers). If a frame is smaller than 64 bytes, it will be padded. If it’s larger than 1518 bytes, it’s either fragmented or considered a jumbo frame if the network supports that.
+
+     In Wireshark, you can observe the **frame size** in the first summary line of each captured packet.
+
+### 2. **Data Link Layer (Layer 2) - MAC Address & ARP**
+
+   - **MAC Address**:
+     The **MAC address** is a hardware identifier assigned to network interfaces. It is used for communication within the local network. Every Ethernet frame includes both a **source** and a **destination** MAC address.
+
+     In Wireshark, you can easily inspect the **Ethernet II** section of a captured frame to see the MAC addresses of both the sender and the receiver.
+
+   - **ARP (Address Resolution Protocol)**:
+     ARP is used to resolve an IP address to a MAC address on the local network. When a host wants to communicate with another device within the same network, it uses ARP to discover the device's MAC address using its IP address.
+
+     In Wireshark, ARP packets can be filtered with `arp`. These packets typically show:
+     - **Who has** (request) or **is at** (response).
+     - The MAC address-to-IP address mapping.
+
+### 3. **Network Layer (Layer 3) - IP Packet**
+
+   - **IP Packet**:
+     The **IP packet** includes a header that contains important information such as:
+     - **Source IP Address**: The IP address of the sender.
+     - **Destination IP Address**: The IP address of the receiver.
+     - **Protocol**: Identifies the protocol used in the payload (e.g., TCP, UDP, ICMP).
+
+     In Wireshark, the IP header can be examined under the **Internet Protocol Version 4 (IPv4)** section. It shows details like the source and destination IPs, Time To Live (TTL), protocol, and flags for fragmentation.
+
+   - **Fragmentation**:
+     IP fragmentation occurs when large packets are divided into smaller pieces to fit within the MTU (Maximum Transmission Unit) of a network. In fragmented packets, the **Fragment Offset** field is used to reassemble the original data.
+
+     In Wireshark, IP fragments can be seen when the **More Fragments** bit is set, or if the packet’s offset is non-zero. You can filter fragmented IP packets using `ip.flags.mf==1`.
+
+   - **ICMP (Internet Control Message Protocol)**:
+     ICMP is used for diagnostic purposes, such as in the **ping** command. ICMP packets can include types like **Echo Request** and **Echo Reply**.
+
+     In Wireshark, you can filter ICMP traffic using `icmp`. ICMP packets will display fields like the **type** (e.g., Echo Request, Echo Reply), code, and checksum.
+
+### 4. **Transport Layer (Layer 4)**
+
+   - **TCP Ports**:
+     The **Transmission Control Protocol (TCP)** is a connection-oriented protocol used for reliable communication. TCP packets contain **source** and **destination ports**, which help identify the application running on each end (e.g., HTTP uses port 80, HTTPS uses port 443).
+     
+     In Wireshark, TCP packets can be filtered using `tcp`. You can see both the source and destination port numbers in the **Transmission Control Protocol** section of the packet.
+
+   - **TCP Handshake**:
+     The **TCP three-way handshake** is used to establish a reliable connection between two hosts. It consists of:
+     1. **SYN**: The client sends a SYN packet to the server to request a connection.
+     2. **SYN-ACK**: The server responds with a SYN-ACK to acknowledge the request.
+     3. **ACK**: The client sends an ACK to confirm the connection is established.
+
+     In Wireshark, you can observe the handshake by looking at the **TCP flags** in the packet details:
+     - `SYN`: The first packet has only the SYN flag set.
+     - `SYN, ACK`: The second packet has both SYN and ACK flags set.
+     - `ACK`: The third packet has only the ACK flag set.
+
+     You can filter the handshake with `tcp.flags.syn==1`.
+
+### Putting It All Together in Wireshark:
+
+When you capture network traffic with Wireshark, you can follow these steps to observe the TCP/IP layers in action:
+1. **Capture Traffic**: Start a capture while performing an activity like browsing the web or pinging a host.
+2. **Analyze Ethernet Layer**: Look at the **Ethernet II** section to see the MAC addresses, frame size, and protocol type.
+3. **Check ARP Requests**: Filter with `arp` to see how ARP resolves IP-to-MAC mappings.
+4. **Inspect IP Headers**: In the **Internet Protocol** section, observe the source and destination IPs, TTL, fragmentation details, and ICMP messages (if applicable).
+5. **Observe TCP Handshakes**: Filter with `tcp.flags.syn==1` to observe TCP SYN packets and see the entire handshake process.
+6. **Fragmented Packets**: Use `ip.flags.mf == 1` to track fragmented IP packets and understand how large packets are broken down for transmission.
+
+Each layer plays a crucial role in moving data across networks, and Wireshark gives you visibility into how these layers interact in real time!

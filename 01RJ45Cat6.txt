@@ -1,0 +1,56 @@
+### Color Code for RJ45 (Ethernet Cable Wiring)
+
+There are two standards for wiring RJ45 connectors, **T568A** and **T568B**. The color codes for each standard are as follows:
+
+#### T568A Standard
+1. **Pin 1**: White/Green  
+2. **Pin 2**: Green  
+3. **Pin 3**: White/Orange  
+4. **Pin 4**: Blue  
+5. **Pin 5**: White/Blue  
+6. **Pin 6**: Orange  
+7. **Pin 7**: White/Brown  
+8. **Pin 8**: Brown  
+
+#### T568B Standard
+1. **Pin 1**: White/Orange  
+2. **Pin 2**: Orange  
+3. **Pin 3**: White/Green  
+4. **Pin 4**: Blue  
+5. **Pin 5**: White/Blue  
+6. **Pin 6**: Green  
+7. **Pin 7**: White/Brown  
+8. **Pin 8**: Brown  
+
+Both standards are used in networking, with T568B being the more commonly used in the US.
+
+### Cat6 Cable Description
+
+**Category 6 (Cat6) cable** is a standard for **Gigabit Ethernet** and other network protocols that is backward-compatible with Cat5 and Cat5e cables. Here's a description of its key features:
+
+1. **Transmission Speed**: 
+   - Cat6 cables support data transmission speeds up to **10 Gbps** over distances up to 55 meters, and up to **1 Gbps** for distances up to 100 meters.
+
+2. **Bandwidth**: 
+   - Cat6 cables have a bandwidth capacity of **250 MHz**, which reduces crosstalk and provides higher performance than Cat5 and Cat5e.
+
+3. **Cable Structure**:
+   - **Four twisted pairs** of copper wires are inside the cable. The twisting of the pairs helps to minimize electromagnetic interference (EMI).
+   - The wires are usually 23 AWG (American Wire Gauge), thicker than those used in Cat5e cables.
+
+4. **Shielding**:
+   - Cat6 cables can be **shielded (STP)** or **unshielded (UTP)**, depending on the level of protection required from interference. Shielded cables provide better protection in high-interference environments.
+
+5. **Use Cases**:
+   - Cat6 is ideal for **high-speed networks**, including **data centers**, offices, and environments where faster data transfer is required, such as for **video streaming, VoIP, and large file transfers**.
+
+6. **Connector Type**:
+   - Cat6 cables typically use **RJ45 connectors**, which are compatible with Ethernet ports on computers, routers, and other networking devices.
+
+7. **Cable Length**:
+   - The maximum length of a Cat6 cable for **1 Gbps** Ethernet is **100 meters** (328 feet). For **10 Gbps**, the recommended maximum length is **55 meters** (180 feet).
+
+8. **Backward Compatibility**:
+   - Cat6 cables are backward-compatible with Cat5 and Cat5e cables, meaning they can be used with older devices that support lower transmission speeds.
+
+Cat6 cables are commonly used in modern networks to ensure fast, reliable data transmission, especially in professional settings like server rooms and high-speed LANs.

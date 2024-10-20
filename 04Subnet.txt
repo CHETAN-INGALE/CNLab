@@ -1,0 +1,78 @@
+To subnet a **Class C address (192.168.240.0/24)** into two subnets that can accommodate 50 hosts each, let's break down the process and calculations:
+
+### Step-by-Step Subnetting:
+
+1. **Given Address**: 192.168.240.0/24
+   - **Class C** addresses have a default subnet mask of **255.255.255.0 (/24)**, meaning the first three octets (192.168.240) are the network part, and the last octet (0) is the host part.
+
+2. **Hosts Requirement**:
+   - Each subnet needs to accommodate **50 hosts**.
+   - The formula to calculate the required number of host bits is:
+     \[
+     2^h - 2 \geq \text{number of hosts}
+     \]
+     - Where **h** is the number of host bits, and we subtract 2 (one for the network address and one for the broadcast address).
+
+     For 50 hosts, the minimum number of bits needed:
+     \[
+     2^6 - 2 = 64 - 2 = 62
+     \]
+     So, 6 bits are required for hosts. That leaves us with **2 bits for subnetting**.
+
+3. **Subnet Mask**:
+   - With **2 bits** used for subnetting, the new subnet mask is:
+     \[
+     /24 + 2 = /26 \quad (\text{or } 255.255.255.192)
+     \]
+     This gives us 4 subnets, and each subnet can support up to 62 hosts.
+
+### Subnet Calculation:
+
+#### 1. **Subnet 1** (First 62 Hosts):
+   - **Network Address**: 192.168.240.0  
+   - **Subnet Mask**: 255.255.255.192 (/26)  
+   - **Usable IP Range**:  
+     - **From**: 192.168.240.1  
+     - **To**: 192.168.240.62  
+   - **Broadcast Address**: 192.168.240.63  
+
+#### 2. **Subnet 2** (Next 62 Hosts):
+   - **Network Address**: 192.168.240.64  
+   - **Subnet Mask**: 255.255.255.192 (/26)  
+   - **Usable IP Range**:  
+     - **From**: 192.168.240.65  
+     - **To**: 192.168.240.126  
+   - **Broadcast Address**: 192.168.240.127  
+
+### Subnets Breakdown:
+1. **Subnet 1**:  
+   - Network Address: 192.168.240.0/26  
+   - Usable IP range: 192.168.240.1 - 192.168.240.62  
+   - Broadcast Address: 192.168.240.63  
+
+2. **Subnet 2**:  
+   - Network Address: 192.168.240.64/26  
+   - Usable IP range: 192.168.240.65 - 192.168.240.126  
+   - Broadcast Address: 192.168.240.127  
+
+This provides two subnets, each capable of hosting up to 62 hosts (more than enough for the 50 hosts required).
+
+### Packet Tracer Design:
+
+In **Cisco Packet Tracer**, follow these steps:
+1. **Create the Network**:
+   - Assign the first subnet (192.168.240.0/26) to one part of the network (e.g., a switch connected to a router).
+   - Assign the second subnet (192.168.240.64/26) to another part of the network (e.g., another switch or a different department).
+   
+2. **Router Configuration**:
+   - Configure the router to handle both subnets by creating two interfaces (or sub-interfaces) for each subnet:
+     - **Router Interface for Subnet 1**: Assign an IP from 192.168.240.1-62.
+     - **Router Interface for Subnet 2**: Assign an IP from 192.168.240.65-126.
+
+3. **Host Assignments**:
+   - Ensure that each host device in the network gets a unique IP address within its respective subnet range.
+   - Set the **default gateway** for each host to the corresponding router interface's IP address for that subnet.
+
+By configuring the network like this in Packet Tracer, you will have two functional subnets with 50 hosts each.
+
+Let me know if you'd like more detailed steps for the Packet Tracer setup!
